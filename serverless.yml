@@ -1,0 +1,17 @@
+service: aws-python # NOTE: update this with your service name
+provider:
+  name: aws
+  runtime: python2.7
+plugins:
+  - serverless-python-requirements
+package:
+  exclude:
+    - .gitignore
+    - node_modules/**
+functions:
+  standup_reminder:
+    handler: handler.standup_reminder
+    events:
+      - alexaSkill
+    environment:
+      COG_WEBHOOK: ${file(secrets.yml):cog.webhook} 
